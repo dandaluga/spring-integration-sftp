@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--<context:property-placeholder location="classpath:sftp-localhost.properties"/>-->
+    <context:property-placeholder location="classpath:sftp-nas.properties"/>
+
+    <!--
+        Using a caching connection factory appears to spawn a thread and keep a connection to the server.
+        That might be better for performance but it also appears to maintain a connection to the server.
+         For now, I just want to get a connection to the server, do the work and then disconnect.
+    -->
+    <!--<bean id="sftpSessionFactory" class="org.springframework.integration.file.remote.session.CachingSessionFactory">-->
+        <!--<constructor-arg ref="defaultSftpSessionFactory" />-->
+    <!--</bean>-->
+
+    <!--<bean id="defaultSftpSessionFactory" class="org.springframework.integration.sftp.session.DefaultSftpSessionFactory">-->
+    <bean id="sftpSessionFactory" class="org.springframework.integration.sftp.session.DefaultSftpSessionFactory">
+        <property name="host" value="${host}"/>
+        <property name="port" value="${port}"/>
+        <property name="user" value="${username}"/>
+        <!--<property name="password" value="${password}"/>-->
+        <property name="privateKey" value="${privatekey}"/>
+        <property name="privateKeyPassphrase" value="${passphrase}"/>
+        <property name="allowUnknownKeys" value="true"/>
+    </bean>
+
+    <!--<bean id="remoteFileTemplate" class="org.springframework.integration.file.remote.RemoteFileTemplate">-->
+        <!--<constructor-arg ref="sftpSessionFactory" />-->
+    <!--</bean>-->
+
+    <bean id="remoteFileTemplate" class="org.springframework.integration.sftp.session.SftpRemoteFileTemplate">
+        <constructor-arg ref="sftpSessionFactory" />
+    </bean>
+
+    <!--<int-sftp:inbound-channel-adapter id="sftpInboundAdapter"-->
+                                      <!--auto-startup="false"-->
+                                      <!--channel="receiveChannel"-->
+                                      <!--session-factory="sftpSessionFactory"-->
+                                      <!--local-directory="/Users/username/ftp-local"-->
+                                      <!--remote-directory="/root"-->
+                                      <!--auto-create-local-directory="true"-->
+                                      <!--delete-remote-files="true"-->
+                                      <!--filename-pattern="*.html">-->
+        <!--<int:poller fixed-rate="5000" max-messages-per-poll="1" />-->
+    <!--</int-sftp:inbound-channel-adapter>-->
+
+    <!--<int:channel id="receiveChannel">-->
+        <!--<int:queue/>-->
+    <!--</int:channel>-->
+
+</beans>
