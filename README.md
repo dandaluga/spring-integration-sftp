@@ -3,7 +3,7 @@ Spring Integration SFTP Example
 
 ### Some SFTP Notes
 
-* You should always keep StrictHostKeyChecking as 'yes'. Putting to 'no' will make you susceptible to the 'man in the middle' attack (not recommended).
+* You should always keep StrictHostKeyChecking as 'yes'. Putting to 'no' will make you susceptible to the 'man in the middle' attack (not recommended). The default configuration is 'yes'.
 
 * Option 1: Use a private and public key combination (See my Evernote note on how to generate this combination).
   * Username is required (user).
@@ -13,4 +13,8 @@ Spring Integration SFTP Example
   * If you set the allow unknown keys to false (allowUnknownKeys), then you need to supply a known host file so that you can verify the servers identitfy (recommended). If you set this to true, then it will automatically accept the RSA footprint of the server (not recommended).
 
 * Option 2: Use a username and password approach. 
-  * Username is required.
+  * Username is required (user).
+  * Password is required (password).
+  * The private key is not needed (privateKey).
+  * The passphrase is not needed (privateKeyPassphrase).
+  * If you set the allow unknown keys to false (allowUnknownKeys), then you need to supply a known host file so that you can verify the servers identitfy (recommended). If you set this to true, then it will automatically accept the RSA footprint of the server (not recommended).
