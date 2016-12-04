@@ -21,11 +21,18 @@
         <property name="host" value="${host}"/>
         <property name="port" value="${port}"/>
         <property name="user" value="${username}"/>
-        <!--<property name="password" value="${password}"/>-->
-        <property name="privateKey" value="${privatekey}"/>
-        <property name="privateKeyPassphrase" value="${passphrase}"/>
-        <property name="allowUnknownKeys" value="true"/>
+        <property name="password" value="${password}"/>
+        <!--<property name="privateKey" value="${privatekey}"/>-->
+        <!--<property name="privateKeyPassphrase" value="${passphrase}"/>-->
+        <property name="allowUnknownKeys" value="false"/>
+        <property name="knownHosts" value="${knownhost}"/>
+        <!--<property name="sessionConfig" ref="sessionConfig"/>-->
+        <!--<property name="userInfo" ref=""/>-->
     </bean>
+
+    <!--<bean id="sessionConfig">-->
+        <!--<property name="PreferredAuthentications" value="publickey,keyboard-interactive,password"/>-->
+    <!--</bean>-->
 
     <!--<bean id="remoteFileTemplate" class="org.springframework.integration.file.remote.RemoteFileTemplate">-->
         <!--<constructor-arg ref="sftpSessionFactory" />-->
@@ -39,7 +46,7 @@
                                       <!--auto-startup="false"-->
                                       <!--channel="receiveChannel"-->
                                       <!--session-factory="sftpSessionFactory"-->
-                                      <!--local-directory="/Users/username/ftp-local"-->
+                                      <!--local-directory="/Users/dandaluga/ftp-local"-->
                                       <!--remote-directory="/root"-->
                                       <!--auto-create-local-directory="true"-->
                                       <!--delete-remote-files="true"-->

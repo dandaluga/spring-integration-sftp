@@ -46,6 +46,8 @@ public class SpringIntegrationSftpApplication implements CommandLineRunner {
 		secondLines.forEach(line -> LOGGER.info("File line = " + line));
 
 		LOGGER.info("SFTP example has ended...");
+
+		LOGGER.info("user.dir=" + System.getProperty("user.dir"));
 	}
 
 }
